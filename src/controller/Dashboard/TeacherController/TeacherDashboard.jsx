@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import useLogout from './Logout/Logout';
 
 const TeacherDashboard = () => {
   const [attendance, setAttendance] = useState({});
   const [date, setDate] = useState('');
   const [students,setStudents] = useState([]);
 
+  const logout = useLogout()
 
   const navigate = useNavigate()
 
@@ -80,6 +82,16 @@ const TeacherDashboard = () => {
     <Container className="mt-4">
       <h3 className="mb-4">Attendance Portal</h3>
 
+      <Row>
+      <Col md={10}>
+      <h3 className="mb-4">Welcome, {studentName}</h3>
+      </Col>
+      <Col  md={2}>
+        <Button variant="primary" onClick={()=>{logout}}>
+                    <LogOut className="me-2" size={16} /> Logout
+        </Button>
+      </Col>
+    </Row>
 
       <Row className="mb-3">
         <Col md={4}>

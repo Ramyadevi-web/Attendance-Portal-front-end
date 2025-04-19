@@ -3,11 +3,11 @@ import { Container, Card, Table, Row, Col, ProgressBar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../Context/AuthContext';
+import useLogout from './Logout/Logout';
 
 const StudentDashboard = () => { 
 
-    const {setIsLoggedIn} = useAuthContext()
+  const logout = useLogout()
 
   const [attendanceRecords, setAttendanceRecords] = useState([]);
   const [studentName, setStudentName] = useState('');
@@ -38,14 +38,6 @@ const StudentDashboard = () => {
       });
   }, []);
 
-
-  const handleLogout =  ()=>{
-      sessionStorage.removeItem('_tk')
-      setIsLoggedIn(false)
-      console.log("logout")
-      navigate('/')
-  }
-
   return (
     <Container className="mt-4">
     <Row>
@@ -53,7 +45,7 @@ const StudentDashboard = () => {
       <h3 className="mb-4">Welcome, {studentName}</h3>
       </Col>
       <Col  md={2}>
-        <Button variant="primary" onClick={()=>{handleLogout()}}>
+        <Button variant="primary" onClick={()=>{logout}}>
                     <LogOut className="me-2" size={16} /> Logout
         </Button>
       </Col>

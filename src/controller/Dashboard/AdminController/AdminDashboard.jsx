@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
+import useLogout from './Logout/Logout';
 
 
 export default function AdminDashboard() {
@@ -16,6 +17,7 @@ export default function AdminDashboard() {
   const [adminCount,setAdminCount] = useState(0)
 
    const navigate = useNavigate()
+   const logout = useLogout()
 
   useEffect(()=>{
     fetch("http://localhost:8000/dashboard/admin-dashboard")
@@ -57,7 +59,18 @@ export default function AdminDashboard() {
 
   return (
     <Container fluid className="py-4">
-      {/* Summary Cards */}
+      
+      <Row>
+      <Col md={10}>
+      <h3 className="mb-4">Welcome, {studentName}</h3>
+      </Col>
+      <Col  md={2}>
+        <Button variant="primary" onClick={()=>{logout}}>
+                    <LogOut className="me-2" size={16} /> Logout
+        </Button>
+      </Col>
+    </Row>
+
       <Row className="mb-4">
         {summaryCards.map((card, index) => (
           <Col key={index} md={4} className="mb-3">
@@ -74,7 +87,7 @@ export default function AdminDashboard() {
         ))}
       </Row>
 
-      {/* Role Distribution Pie Chart */}
+    
       <Card className="mb-4">
         <Card.Body>
           <Card.Title>Users by Role</Card.Title>
@@ -100,7 +113,7 @@ export default function AdminDashboard() {
         </Card.Body>
       </Card>
 
-      {/* Quick Actions */}
+   
       <Row>
         <Col>
           <Button variant="primary" className="me-2" onClick={()=>navigate('/add-user',{state:{source: 'AdminDashboard'}})}>
