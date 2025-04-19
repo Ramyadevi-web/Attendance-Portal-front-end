@@ -3,17 +3,18 @@ import { decodeToken, useJwt } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 
 
-const authContext = createContext({
+const AuthContext = createContext({
     isLoggedIn:false,
     setIsLoggedIn : ()=>{},
-    decodedToken:{}
+    decodedToken:{},
+    setToken: () => {},
 })
 
 
 
-export const useAuthContext = () => useContext(authContext)
+export const useAuthContext = () => useContext(AuthContext)
 
-export default function authContextComponent({children}){
+export default function AuthContextComponent({children}){
     
     const [isFirstLogin, setIsFirstLogin] = useState(true);
 
@@ -22,7 +23,17 @@ export default function authContextComponent({children}){
    const [isLoggedIn,setIsLoggedIn] = useState(false)
 
    //get token from session storage
-   const [token, setToken] = useState(() => sessionStorage.getItem("_tk"));
+   const [token, _setToken] = useState(() => sessionStorage.getItem("_tk"));
+
+   const setToken = (newToken) => {
+    if (newToken) {
+      sessionStorage.setItem('_tk', newToken);
+    } else {
+      sessionStorage.removeItem('_tk');
+    }
+    _setToken(newToken);
+  };
+
 
    const {decodedToken,isExpired} = useJwt(token || "")
     
@@ -41,9 +52,18 @@ export default function authContextComponent({children}){
     }
     },[token])
 
+
+    useEffect(() => {
+      console.log("Decoded Token:", decodedToken);
+      console.log("Is Expired:", isExpired);
+      console.log("Token:", token);
+      console.log("Is Logged In:", isLoggedIn);
+    }, [decodedToken, isExpired, token, isLoggedIn]);
+
+    
     //Watch decoded token to navigate to the correct route
   useEffect(() => {
-    if (decodedToken && isFirstLogin) {
+    if (decodedToken && isFirstLogin &&  decodedToken.roles) {
       console.log("decodeRoles",decodedToken.roles)
     
       if (decodedToken.roles.includes("Student")) {
@@ -52,6 +72,8 @@ export default function authContextComponent({children}){
         navigate('/teacher-dashboard');
       } else if (decodedToken.roles.includes("Admin")) {
         navigate('/admin-dashboard');
+      }else{
+        navigate('/')
       }
       setIsFirstLogin(false)
     }else{
@@ -68,5 +90,5 @@ export default function authContextComponent({children}){
     setToken
    })
 
-   return <authContext.Provider value={values}>{children}</authContext.Provider>
+   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
 }

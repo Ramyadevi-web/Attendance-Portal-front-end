@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
-import useLogout from './Logout/Logout';
+import useLogout from '../Logout/Logout.js';
+import { LogOut } from 'lucide-react';
 
 
 export default function AdminDashboard() {
@@ -60,12 +61,9 @@ export default function AdminDashboard() {
   return (
     <Container fluid className="py-4">
       
-      <Row>
-      <Col md={10}>
-      <h3 className="mb-4">Welcome, {studentName}</h3>
-      </Col>
-      <Col  md={2}>
-        <Button variant="primary" onClick={()=>{logout}}>
+      <Row className='mb-4'>
+      <Col className='d-flex justify-content-end'>
+        <Button variant="primary" onClick={logout}>
                     <LogOut className="me-2" size={16} /> Logout
         </Button>
       </Col>

@@ -49,9 +49,6 @@ function Login() {
               setToken(result.token);
               setIsLoggedIn(true)
 
-              //stores token value in session storage
-               sessionStorage.setItem('_tk',result.token)
-
 
             }else{ 
               //Login data not correct show alert

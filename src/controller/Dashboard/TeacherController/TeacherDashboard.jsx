@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import useLogout from './Logout/Logout';
+import useLogout from '../Logout/Logout.js';
+import { LogOut } from 'lucide-react';
 
 const TeacherDashboard = () => {
   const [attendance, setAttendance] = useState({});
@@ -80,18 +81,7 @@ const TeacherDashboard = () => {
 
   return (
     <Container className="mt-4">
-      <h3 className="mb-4">Attendance Portal</h3>
-
-      <Row>
-      <Col md={10}>
-      <h3 className="mb-4">Welcome, {studentName}</h3>
-      </Col>
-      <Col  md={2}>
-        <Button variant="primary" onClick={()=>{logout}}>
-                    <LogOut className="me-2" size={16} /> Logout
-        </Button>
-      </Col>
-    </Row>
+      <h3 className="mb-4 d-flex justify-content-center">Attendance Portal</h3>
 
       <Row className="mb-3">
         <Col md={4}>
@@ -101,11 +91,16 @@ const TeacherDashboard = () => {
                                                                  handleChangeDate();
                                                                  }}/>
         </Col>
-        <Col md={4} >
+        <Col md={6} >
         <Button variant="info" onClick={()=>navigate('/teacher-dashboard/view-attendance')} className="ms-2">
           View Attendance
         </Button>
         </Col>
+        <Col  md={2}>
+        <Button variant="primary" onClick={logout}>
+                    <LogOut className="me-2" size={16} /> Logout
+        </Button>
+      </Col>
       </Row>
 
       <Table bordered hover>

@@ -2,21 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, Table, Row, Col, ProgressBar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import useLogout from './Logout/Logout';
+import {useAuthContext} from '../../Context/AuthContext.jsx'
 
 const StudentDashboard = () => { 
 
   const logout = useLogout()
+  const {decodedToken} = useAuthContext()
 
   const [attendanceRecords, setAttendanceRecords] = useState([]);
   const [studentName, setStudentName] = useState('');
   const [attendancePercentage, setAttendancePercentage] = useState(0);
-  const navigate = useNavigate()
+ 
 
   useEffect(() => {
     
-    const studentId = localStorage.getItem('studentId');
+   
+    const studentId = decodedToken?.uid;
+    
+    if (!studentId || studentId.length !== 24) {
+      console.error("Invalid or missing studentId");
+      console.log("dtoken",decodedToken)
+      return;
+    }
+
     console.log(`http://localhost:8000/attendance/attendance-by-studentid/${studentId}`)
 
     fetch(`http://localhost:8000/attendance/attendance-by-studentid/${studentId}`)
@@ -36,7 +45,7 @@ const StudentDashboard = () => {
       .catch(err => {
         console.error("Failed to fetch attendance:", err);
       });
-  }, []);
+  }, [decodedToken]);
 
   return (
     <Container className="mt-4">
@@ -45,7 +54,7 @@ const StudentDashboard = () => {
       <h3 className="mb-4">Welcome, {studentName}</h3>
       </Col>
       <Col  md={2}>
-        <Button variant="primary" onClick={()=>{logout}}>
+        <Button variant="primary" onClick={logout}>
                     <LogOut className="me-2" size={16} /> Logout
         </Button>
       </Col>
