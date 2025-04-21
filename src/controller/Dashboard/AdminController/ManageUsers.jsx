@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate ,Link} from 'react-router-dom';
+import { LogOut } from 'lucide-react';
+import useLogout from '../Logout/Logout.js';
 
 const ManageUsers = () => {
 
   const navigate = useNavigate()
  const [users,setUsers] = useState([]);
  const [originalUser,setOriginalUser] = useState([])
+   const logout = useLogout()
 
  const handleSearch = (e)=>{
   const query =  e.target.value.toLowerCase(); 
@@ -61,6 +64,11 @@ const ManageUsers = () => {
         <Col><h2>Manage Users</h2></Col>
         <Col className="text-end">
           <Button variant="primary" onClick={()=>navigate('/add-user',{state:{source: 'ManageUsers'}})}>+ Add User</Button>
+        </Col>
+         <Col className='d-flex justify-content-end'>
+                <Button variant="primary" onClick={logout}>
+                            <LogOut className="me-2" size={16} /> Logout
+                </Button>
         </Col>
       </Row>
 

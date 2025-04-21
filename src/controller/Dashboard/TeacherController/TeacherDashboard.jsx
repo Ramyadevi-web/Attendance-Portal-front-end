@@ -19,7 +19,7 @@ const TeacherDashboard = () => {
 
    useEffect(()=>{
 
-      fetch("https://attendant-portal-backend.onrender.com/dashboard/admin-dashboard")
+      fetch("https://attendance-portal-backend-n1hg.onrender.com/dashboard/admin-dashboard")
       .then((response)=>response.json())
       .then((result)=>{
   
@@ -54,7 +54,7 @@ const TeacherDashboard = () => {
 
          
 
-          const response = await fetch('https://attendant-portal-backend.onrender.com/attendance/attendance-report', {
+          const response = await fetch('https://attendance-portal-backend-n1hg.onrender.com/attendance/attendance-report', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
