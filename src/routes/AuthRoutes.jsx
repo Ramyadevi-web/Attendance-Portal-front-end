@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Routes,Route} from 'react-router-dom'
 import { useAuthContext } from '../Context/AuthContext.jsx'
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../configs/RouteConfig.js'
@@ -6,7 +6,15 @@ import NotFound from '../Error/NotFound.jsx'
 
 function AuthRoutes() {
 
-   const {isLoggedIn,decodedToken} = useAuthContext();
+   const {isLoggedIn,decodedToken,token} = useAuthContext();
+
+   const [isTokenReady, setIsTokenReady] = useState(false);
+
+  useEffect(() => { //checking is token ready to get correct page.
+    if (!token || decodedToken !== null) {
+      setIsTokenReady(true);
+    }
+  }, [decodedToken,token]);
 
     const userRole = decodedToken?.roles || ""
 
@@ -35,7 +43,7 @@ function publicRouter(){
 
    return privateRouteList;
 }
- 
+if (!isTokenReady) return <div>Loading...</div>;
    return (
     <Routes>
      { !isLoggedIn && publicRouter()}

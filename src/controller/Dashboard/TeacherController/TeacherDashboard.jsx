@@ -54,7 +54,7 @@ const TeacherDashboard = () => {
 
          
 
-          const response = await fetch('http://localhost:8000/attendance/attendance-report', {
+          const response = await fetch('https://attendant-portal-backend.onrender.com/attendance/attendance-report', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

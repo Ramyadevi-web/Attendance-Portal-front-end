@@ -51,7 +51,7 @@ function AddUser() {
               role,
               ...(role !== "Admin" && {attendance:[]})
             })
-           fetch("http://localhost:8000/dashboard/add-user",{
+           fetch("https://attendant-portal-backend.onrender.com/dashboard/add-user",{
             method:"POST",
             headers:{
               "Content-Type":"application/json"

@@ -26,9 +26,8 @@ const StudentDashboard = () => {
       return;
     }
 
-    console.log(`http://localhost:8000/attendance/attendance-by-studentid/${studentId}`)
-
-    fetch(`http://localhost:8000/attendance/attendance-by-studentid/${studentId}`)
+   
+    fetch(`https://attendant-portal-backend.onrender.com/attendance/attendance-by-studentid/${studentId}`)
       .then(res => res.json())
       .then(data => {
         const result = data.response;

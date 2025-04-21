@@ -14,7 +14,7 @@ function ResetPassword() {
     e.preventDefault();
     const password = passwordRef.current.value;
 
-    fetch('http://localhost:8000/auth/reset-password/', {
+    fetch('https://attendant-portal-backend.onrender.com/auth/reset-password/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password, token }),

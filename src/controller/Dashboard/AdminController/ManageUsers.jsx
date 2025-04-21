@@ -25,7 +25,7 @@ const ManageUsers = () => {
  const handleDelete =  async (id)=>{
   try {
     console.log("id",id)
-   const response = await fetch(`http://localhost:8000/dashboard/delete-user/${id}`,
+   const response = await fetch(`https://attendant-portal-backend.onrender.com/dashboard/delete-user/${id}`,
       {
         method:"DELETE",
       }

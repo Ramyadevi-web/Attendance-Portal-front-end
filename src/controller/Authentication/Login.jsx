@@ -32,7 +32,7 @@ function Login() {
     }else{
 
      //Fetch loginData from server 
-      fetch("http://localhost:8000/auth/signIn",{
+      fetch("https://attendant-portal-backend.onrender.com/auth/signIn",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

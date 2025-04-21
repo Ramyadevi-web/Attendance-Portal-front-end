@@ -25,7 +25,7 @@ function Signup() {
          const email = emailRef.current.value;
          const password = passwordRef.current.value;
 
-       fetch("http://localhost:8000/auth/signUp",{
+       fetch("https://attendant-portal-backend.onrender.com/auth/signUp",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

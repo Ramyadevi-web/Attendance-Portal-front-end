@@ -20,7 +20,7 @@ function ForgotPassword() {
       alert("Enter valid email Id")
      }
 
-     fetch("http://localhost:8000/auth/forgotPassword",
+     fetch("https://attendant-portal-backend.onrender.com/auth/forgotPassword",
       {
         method:"POST",
         headers:{

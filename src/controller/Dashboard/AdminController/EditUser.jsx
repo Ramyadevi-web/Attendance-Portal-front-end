@@ -47,7 +47,7 @@ function EditUser() {
             //   role,
             //   ...(role !== "Admin" && {attendance:[]})
             // })
-           fetch("http://localhost:8000/dashboard/manage-users/edit-user/:id",{
+           fetch("https://attendant-portal-backend.onrender.com/dashboard/manage-users/edit-user/:id",{
             method:"PUT",
             headers:{
               "Content-Type":"application/json"

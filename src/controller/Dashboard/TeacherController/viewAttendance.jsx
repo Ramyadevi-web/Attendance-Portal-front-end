@@ -18,7 +18,7 @@ const viewAttendance = () =>{
           return;
         }
      
-           fetch(`http://localhost:8000/attendance/attendance-by-date/${date}`)
+           fetch(`https://attendant-portal-backend.onrender.com/attendance/attendance-by-date/${date}`)
            .then((response)=>response.json())
            .then((result)=>{
             if (result.length === 0) {
