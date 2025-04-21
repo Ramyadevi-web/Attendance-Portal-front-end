@@ -13,7 +13,6 @@ function EditUser() {
     const firstNameRef = useRef(null)
       const lastNameRef = useRef(null)
       const emailRef = useRef(null)
-      const passwordRef = useRef(null)
 
       const navigate = useNavigate()
 
@@ -37,7 +36,6 @@ function EditUser() {
         const firstName = firstNameRef.current.value;
         const lastName = lastNameRef.current.value;
         const email = emailRef.current.value;
-        const password = passwordRef.current.value;
         const role = selectedRole;
         const department = (selectedRole === "Teacher") ? selectedDepartment: ""
 
@@ -67,7 +65,6 @@ function EditUser() {
              const firstName = firstNameRef.current.value;
               const lastName = lastNameRef.current.value;
               const email = emailRef.current.value;
-              const password = passwordRef.current.value;
               const role = selectedRole;
               const department = (role === "Teacher") ? selectedDepartment : "";
             
@@ -80,7 +77,6 @@ function EditUser() {
               firstName,
               lastName,
               email,
-              password,
               role,
               department
             })
@@ -126,15 +122,6 @@ function EditUser() {
         </Form.Label>
         <Col sm="9">
           <Form.Control type="email" placeholder="email@example.com"  ref={emailRef} required/>
-        </Col>
-      </Form.Group>
-
-      <Form.Group as={Row} className="mb-5" controlId="formPlaintextPassword">
-        <Form.Label column sm="3">
-          Password
-        </Form.Label>
-        <Col sm="9">
-          <Form.Control type="password" placeholder="*************"  ref={passwordRef} required/>
         </Col>
       </Form.Group>
 
