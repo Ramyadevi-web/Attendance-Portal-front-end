@@ -44,7 +44,7 @@ export const PRIVATE_ROUTES = [
     {
         title:'Edit User',
         Component : EditUser,
-        path:'/manage-users/edit-user',
+        path:'/dashboard/edit-user/:id',
         role:"Admin"
     },
     {

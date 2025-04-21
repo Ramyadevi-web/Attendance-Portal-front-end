@@ -21,7 +21,7 @@ export default function AdminDashboard() {
    const logout = useLogout()
 
   useEffect(()=>{
-    fetch("https://attendant-portal-backend.onrender.com/dashboard/admin-dashboard")
+    fetch("https://attendance-portal-backend-n1hg.onrender.com/dashboard/admin-dashboard")
     .then((response)=>response.json())
     .then((result)=>{
 

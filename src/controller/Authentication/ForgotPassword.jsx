@@ -20,7 +20,7 @@ function ForgotPassword() {
       alert("Enter valid email Id")
      }
 
-     fetch("https://attendant-portal-backend.onrender.com/auth/forgotPassword",
+     fetch("https://attendance-portal-backend-n1hg.onrender.com/auth/forgotPassword",
       {
         method:"POST",
         headers:{

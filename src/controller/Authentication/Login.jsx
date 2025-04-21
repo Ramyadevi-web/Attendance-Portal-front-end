@@ -32,7 +32,7 @@ function Login() {
     }else{
 
      //Fetch loginData from server 
-      fetch("https://attendant-portal-backend.onrender.com/auth/signIn",{
+      fetch("https://attendance-portal-backend-n1hg.onrender.com/auth/signIn",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

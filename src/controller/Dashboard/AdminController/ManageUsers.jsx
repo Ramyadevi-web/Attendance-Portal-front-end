@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Container, Row, Col, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,Link} from 'react-router-dom';
 
 const ManageUsers = () => {
 
@@ -25,7 +25,7 @@ const ManageUsers = () => {
  const handleDelete =  async (id)=>{
   try {
     console.log("id",id)
-   const response = await fetch(`https://attendant-portal-backend.onrender.com/dashboard/delete-user/${id}`,
+   const response = await fetch(`https://attendance-portal-backend-n1hg.onrender.com/dashboard/delete-user/${id}`,
       {
         method:"DELETE",
       }
@@ -43,7 +43,7 @@ const ManageUsers = () => {
  }
 
   useEffect(() => {
-    fetch('http://localhost:8000/dashboard/admin-dashboard')
+    fetch('https://attendance-portal-backend-n1hg.onrender.com/dashboard/admin-dashboard')
       .then((response) => response.json())
       .then((result) => {
         setOriginalUser(result.users || []);
@@ -86,11 +86,12 @@ const ManageUsers = () => {
           <>
           <tr key={user._id || index}>
             <td>{index + 1}</td>
-            <td>{user.firstName + user.lastName}</td>
+            <td>{user.firstName +"  "+ user.lastName}</td>
             <td>{user.email}</td>
             <td>{user.role}</td>
             <td>{user.department}</td>
             <td>
+              <Link to={`/dashboard/edit-user/${user._id}`}><Button  variant="outline-success" size="sm" >Edit</Button></Link>&nbsp;
               <Button variant="outline-danger" size="sm" onClick={()=>handleDelete(user._id)}>Delete</Button>
             </td>
           </tr>
