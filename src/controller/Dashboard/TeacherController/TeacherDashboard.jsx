@@ -19,7 +19,7 @@ const TeacherDashboard = () => {
 
    useEffect(()=>{
 
-      fetch("http://localhost:8000/dashboard/admin-dashboard")
+      fetch("https://attendant-portal-backend.onrender.com/dashboard/admin-dashboard")
       .then((response)=>response.json())
       .then((result)=>{
   

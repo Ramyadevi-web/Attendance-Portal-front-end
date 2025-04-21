@@ -19,7 +19,12 @@ function EditUser() {
       const [selectedRole,setSelectRole] = useState("Select Role")
       const [selectedDepartment,setSelectDepartment] = useState("Select Department")
       const [showDepartment,setShowDepartment] = useState(false)
-    
+      const [firstName,setFirstName] = useState("")
+      const [lastName,setLastName] = useState("")
+      const [email,setEmail] = useState("")
+  
+      
+      
       const handleSelect =  (eventKey,event)=>{
       
         if(event.target.classList.contains('role')){
@@ -33,25 +38,27 @@ function EditUser() {
       }
 
       useEffect(()=>{
-        const firstName = firstNameRef.current.value;
-        const lastName = lastNameRef.current.value;
-        const email = emailRef.current.value;
-        const role = selectedRole;
+        // const firstName = firstNameRef.current.value;
+        // const lastName = lastNameRef.current.value;
+        // const email = emailRef.current.value;
+        // const role = selectedRole;
         const department = (selectedRole === "Teacher") ? selectedDepartment: ""
 
         fetch(`https://attendance-portal-backend-n1hg.onrender.com/dashboard/get-student/${id}`)
          .then((response)=>response.json())
          .then((result)=>{ 
           console.log('result',result)
-          if (firstNameRef.current) firstNameRef.current.value = result.users.firstName;
-          if (lastNameRef.current) lastNameRef.current.value = result.users.lastName;
-          if (emailRef.current) emailRef.current.value = result.users.email;
-          if (passwordRef.current) passwordRef.current.value = result.users.password;
-
-          setSelectRole(result.user.role);
-          if (result.user.role === "Teacher") {
+          // if (firstNameRef.current) firstNameRef.current.value = result.users.firstName;
+          // if (lastNameRef.current) lastNameRef.current.value = result.users.lastName;
+          // if (emailRef.current) emailRef.current.value = result.users.email;
+          // if (passwordRef.current) passwordRef.current.value = result.users.password;
+          setFirstName(result.users.firstName)
+          setLastName(result.users.lastName)
+          setEmail(result.users.email)
+          setSelectRole(result.users.role);
+          if (result.users.role === "Teacher") {
             setShowDepartment(true);
-            setSelectDepartment(result.user.department);
+            setSelectDepartment(result.users.department);
           }
 
         })
@@ -62,9 +69,6 @@ function EditUser() {
 
       const handleEditUser = (event)=>{
              event.preventDefault();
-             const firstName = firstNameRef.current.value;
-              const lastName = lastNameRef.current.value;
-              const email = emailRef.current.value;
               const role = selectedRole;
               const department = (role === "Teacher") ? selectedDepartment : "";
             
@@ -104,7 +108,7 @@ function EditUser() {
           First Name
         </Form.Label>
         <Col sm="9">
-          <Form.Control type="text" placeholder="First Name" ref={firstNameRef} required/>
+          <Form.Control type="text" placeholder="First Name"  value={firstName} onChange={(e)=>setFirstName(e.target.value)} required/>
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-5" controlId="formPlaintextLName">
@@ -112,7 +116,7 @@ function EditUser() {
           Last Name
         </Form.Label>
         <Col sm="9">
-          <Form.Control type="text" placeholder="Last Name"  ref={lastNameRef} required/>
+          <Form.Control type="text" placeholder="Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)}  required/>
         </Col>
       </Form.Group>
       
@@ -121,7 +125,7 @@ function EditUser() {
           Email
         </Form.Label>
         <Col sm="9">
-          <Form.Control type="email" placeholder="email@example.com"  ref={emailRef} required/>
+          <Form.Control type="email" placeholder="email@example.com" value={email}  onChange={(e)=>setEmail(e.target.value)} required/>
         </Col>
       </Form.Group>
 
