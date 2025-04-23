@@ -10,6 +10,7 @@ const useLogout = () =>{
 
    const logout = () => {
        setToken(null)
+       sessionStorage.removeItem("_tk"); 
         setIsLoggedIn(false)
         console.log("logout")
         navigate('/')

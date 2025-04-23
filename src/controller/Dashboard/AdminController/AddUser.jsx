@@ -51,6 +51,9 @@ function AddUser() {
               role,
               ...(role !== "Admin" && {attendance:[]})
             })
+            if(!firstName || !lastName || !email || !role || !password){
+              alert("Kindly fill all the required fields.")
+            }
            fetch("https://attendance-portal-backend-n1hg.onrender.com/dashboard/add-user",{
             method:"POST",
             headers:{
